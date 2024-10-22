@@ -16,7 +16,7 @@ const Page = () => {
         method: "POST",
         body: JSON.stringify({email, password})
       })
-      console.log(await data.json( ));
+      console.log(await data.json());
       
     } catch (error) {
       console.log(error);

@@ -12,11 +12,16 @@ const Page = () => {
   const login = async(e)=>{
     e.preventDefault()
     try {
-      const data = await fetch("api/client/login", {
+      const response = await fetch("/api/client/login", {
         method: "POST",
-        body: JSON.stringify({email, password})
-      })
-      console.log(await data.json());
+        headers: {
+          "Content-Type": "application/json", 
+        },
+        body: JSON.stringify({ email, password }), 
+      });
+  
+      const data = await response.json();
+      console.log(data);
       
     } catch (error) {
       console.log(error);

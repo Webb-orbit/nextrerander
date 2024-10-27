@@ -11,7 +11,7 @@ export async function DELETE(req, { params }) {
     console.log(params);
     
     const documentid =  params.docid
-    const id = getokenid()
+    const id =  await getokenid()
     if (!isValidObjectId(documentid)) {
         return NextResponse.json({ success: false, message: "document id is required" }, { status: 400 })
     }

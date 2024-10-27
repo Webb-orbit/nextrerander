@@ -7,7 +7,7 @@ import { Offlinedoc } from "@/models/offlinemodel"
 export async function PATCH(req, {params}) {
     const { title, content } = await req.json()
     const offdocid = params.offdocid;
-    const id = getokenid();
+    const id = await getokenid();
     const ipress = ip.address('private', 'ipv4')
     if (!isValidObjectId(id)) {
         return NextResponse.json({ success: false, message: "invaild token id" }, { status: 400 })
@@ -32,7 +32,7 @@ export async function PATCH(req, {params}) {
 
     document.title = title;
     document.content = content;
-    const newdoc = await document.save({validatedeforesave: false})
+    const newdoc = await document.save({validateBeforeSave: false})
     if (!newdoc) {
         return NextResponse.json({ success: false, message: "server error to update your document" }, { status: 500 })
     }

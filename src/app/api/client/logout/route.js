@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 await connectdb()
 
 export async function GET() {
-    const id = getokenid()
+    const id = await getokenid()
     if (!id) {
         return NextResponse.json({success: false,message: "token is not found"},{status: 400})
     }

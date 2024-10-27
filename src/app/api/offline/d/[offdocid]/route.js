@@ -6,7 +6,7 @@ import ip from "ip"
 
 export async function DELETE(req, { params }) {
     const offdocid = params.offdocid;
-    const id = getokenid();
+    const id = await getokenid();
     const ipress = ip.address('private', 'ipv4')
     if (!isValidObjectId(id)) {
         return NextResponse.json({ success: false, message: "invaild token id" }, { status: 400 })

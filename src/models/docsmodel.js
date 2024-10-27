@@ -1,5 +1,5 @@
 import {model, models, Schema} from "mongoose";
-import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
+import aggregatePaginate from "mongoose-aggregate-paginate-v2"
 
 const docschema = new Schema({
     title:{
@@ -26,9 +26,6 @@ const docschema = new Schema({
     }
 }, {timestamps: true})
 
-docschema.plugin(mongooseAggregatePaginate)
-
-docschema.index({ createdAt: -1 });  
-docschema.index({ title: 'text' }); 
+docschema.plugin(aggregatePaginate)
 
 export const Docs = models.docs ||  model("docs", docschema)

@@ -25,3 +25,44 @@ body {
     text-wrap: balance;
   }
 }
+
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+*::selection{
+  background-color: white;
+  color: black;
+}
+
+body {
+  background-color: black;
+  color: white;
+}
+
+.scroll::-webkit-scrollbar{
+  width: 0.3rem;
+}
+.scroll::-webkit-scrollbar-thumb{
+  background-color: rgb(69, 69, 69);
+  border-radius: 1rem;
+}
+.scroll::-webkit-scrollbar-button{
+  display: none;
+}
+
+.roboto {
+  font-family: "Roboto", sans-serif;
+}
+
+.noto-sans {
+  font-family: "Noto Sans", sans-serif;
+}
+
+.mingzat {
+  font-family: "Mingzat", sans-serif;
+}

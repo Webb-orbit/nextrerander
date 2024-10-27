@@ -4,11 +4,11 @@ import { getokenid } from "@/utils/gettokenid";
 import { isValidObjectId } from "mongoose";
 import { NextResponse } from "next/server";
 
-await connectdb()
 
+await connectdb()
 export async function GET(req, {params}) {
-    const documentid = params.docid
-    const id = getokenid()
+    const documentid =  params.docid
+    const id = await getokenid()
     if (!isValidObjectId(documentid)) {
         return NextResponse.json({success: false, message: "document id is required"}, {status: 400})
     }

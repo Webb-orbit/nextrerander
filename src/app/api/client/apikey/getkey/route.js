@@ -6,7 +6,7 @@ import { getokenid } from "@/utils/gettokenid";
 await connectdb()
 
 export async function GET() {
-    const id = getokenid();
+    const id = await getokenid();
     if (!id) {
         return NextResponse.json({success: false, message: "token id not found or invalid credentials"},{status: 400})
     }

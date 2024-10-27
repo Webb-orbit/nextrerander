@@ -9,7 +9,7 @@ await connectdb()
 
 export async function DELETE(req, { params }) {
     const shareid =  params.shareid
-    const id = getokenid()
+    const id = await getokenid()
     if (!isValidObjectId(shareid)) {
         return NextResponse.json({ success: false, message: "document id is required" }, { status: 400 })
     }

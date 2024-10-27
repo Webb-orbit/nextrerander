@@ -15,13 +15,13 @@ export async function POST(req) {
     const {email, password} = await req.json()
 
     if ([email, password].some(e => e.trim() === "")) {
-        return NextResponse.json({error: "all filds are required"}, {status: 400})
+        return NextResponse.json({error: "all filds are required", success: false}, {status: 400})
     }
     
     const userexgist = await User.findOne({email})
     
     if (!userexgist) {
-        return NextResponse.json({error: "account not found"}, {status: 400})
+        return NextResponse.json({error: "account not found", success: false}, {status: 400})
     }
     
     const passwordcorrect = await userexgist.comparepass(password)

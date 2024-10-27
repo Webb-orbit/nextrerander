@@ -6,20 +6,22 @@ import { NextResponse } from "next/server";
 
 await connectdb()
 
-export async function POST(req) {    
+export async function POST(req) {
+    const id = await getokenid()
     const data = await req.json()
-    const page = data.page || 0;
-    const limit = data.limit || 12;
-    const q = data.q
 
-    const id = getokenid()
     if (!isValidObjectId(id)) {
         return NextResponse.json({ success: false, message: "token id not found or invalid credentials" }, { status: 400 })
     }
 
+    console.log(data);
+    const page = data?.page || 0;
+    const limit = 12;
+    const q = data?.q || ""
+
     const documentcount = await Docs.countDocuments({ creator: id })
     if (!documentcount) {
-        return NextResponse.json({ success: false, data:{documentcount}, message: "no documents found" }, { status: 400 })
+        return NextResponse.json({ success: false, data: { documentcount }, message: "no documents found" }, { status: 400 })
     }
     let hasmore = (documentcount - page * limit) > limit
     let searchQuery = { creator: id, };
@@ -29,18 +31,18 @@ export async function POST(req) {
 
     const alldocs = await Docs.aggregate([
         { $match: searchQuery },
-        { $sort:{"createdAt": -1}},
-        { $skip: page * limit },
-        { $limit: Number(limit) },
+        // { $sort: { "createdAt": -1 } },
+        // { $skip: page * limit },
+        // { $limit: Number(limit) },
     ])
 
-    if (!alldocs?.length && documentcount>0) {
-        return NextResponse.json({ success: false, data:{alldocs}, message: "server error to find doduments" }, { status: 500 })
+    if (!alldocs?.length && documentcount > 0) {
+        return NextResponse.json({ success: false, data: { alldocs }, message: "server error to find doduments" }, { status: 500 })
     }
     if (!alldocs?.length) {
-        return NextResponse.json({ success: true, data:{alldocs}, message: "no documents found" }, { status: 404 })
+        return NextResponse.json({ success: true, data: { alldocs }, message: "no documents found" }, { status: 404 })
     }
 
-    return NextResponse.json({success: true, data:{ doc: [...alldocs], count: documentcount, page: Number(page), limit: Number(limit), hasmore: hasmore }, message:"clients documents"}, {status: 200})
+    return NextResponse.json({ success: true, data: { doc: [...alldocs], count: documentcount, page: Number(page), limit: Number(limit), hasmore: hasmore }, message: "clients documents" }, { status: 200 })
 
 }

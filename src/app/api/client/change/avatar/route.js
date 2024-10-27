@@ -7,7 +7,7 @@ import { uploadoncloud, deleteoncloud } from "@/utils/mideacloud";
 await connectdb()
 
 export async function PATCH(req) {
-    const id = getokenid()
+    const id = await getokenid()
     const rowdata = await req.formData()
     const avatar = rowdata.get('avater')
         

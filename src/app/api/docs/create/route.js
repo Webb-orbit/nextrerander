@@ -8,7 +8,7 @@ await connectdb()
 
 export async function POST(req) {
     const { title, content, shared } = await req.json()
-    const id = getokenid()
+    const id = await getokenid()
     if (!id) {
         return NextResponse.json({ success: false, message: "token id not found or invalid credentials" }, { status: 400 })
     }

@@ -7,12 +7,12 @@ await connectdb()
 
 export async function PATCH(req) {
     const { apikey } = await req.json()
-    const id = getokenid()
+    const id = await getokenid()
     if (!id) {
         return NextResponse.json({success: false, message: "token id not found or invalid credentials"},{status: 400})
     }
     if (!apikey) {
-        return NextResponse.json({success: false, message: "not dound any api key"},{status: 400})
+        return NextResponse.json({success: false, message: "not found any api key"},{status: 400})
     }
 
     const addkey = await User.findByIdAndUpdate(id,{

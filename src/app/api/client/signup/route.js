@@ -8,14 +8,15 @@ await connectdb()
 export async function POST(req, res, ) {
     
     const data =  await req.formData();
+    console.log(data);
     const formDataObj = {};
     data.forEach((value, key) => {
         formDataObj[key] = value; 
     });
+    console.log(formDataObj);
 
-    
     const {email, username, password, avater} = formDataObj;
-
+    
     const fileBuffer = await avater.arrayBuffer();
     const base64String = Buffer.from(fileBuffer).toString('base64');
     const base64Data = `data:${avater.type};base64,${base64String}`;    

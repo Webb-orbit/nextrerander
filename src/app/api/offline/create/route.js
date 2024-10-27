@@ -6,7 +6,7 @@ import { Offlinedoc } from "@/models/offlinemodel"
 
 export async function POST(req) {
     const { title, content } = await req.json()
-    const id = getokenid()
+    const id = await getokenid()
     if (!isValidObjectId(id)) {
         return NextResponse.json({success: false, message: "invaild token id"},{status: 400})
     }

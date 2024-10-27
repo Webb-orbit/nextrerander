@@ -10,7 +10,7 @@ await connectdb()
 export async function POST(req, { params }) {
     const {privated} = await req.json()
     const documentid =  params.docid
-    const id = getokenid()
+    const id = await getokenid()
     if (!isValidObjectId(documentid)) {
         return NextResponse.json({ success: false, message: "document id is required" }, { status: 400 })
     }

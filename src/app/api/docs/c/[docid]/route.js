@@ -10,7 +10,7 @@ await connectdb()
 export async function PATCH(req, {params}) {
     const documentid = params.docid
     const { title, content, shared } = await req.json()
-    const id = getokenid()
+    const id = await getokenid()
     if (!isValidObjectId(documentid)) {
         return NextResponse.json({success: false, message: "document id is required"}, {status: 400})
     }

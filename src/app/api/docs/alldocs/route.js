@@ -8,6 +8,8 @@ await connectdb()
 
 export async function POST(req) {
     const id = await getokenid()
+    console.log(id);
+    
     const data = await req.json()
 
     if (!isValidObjectId(id)) {
@@ -24,17 +26,22 @@ export async function POST(req) {
         return NextResponse.json({ success: false, data: { documentcount }, message: "no documents found" }, { status: 400 })
     }
     let hasmore = (documentcount - page * limit) > limit
-    let searchQuery = { creator: id, };
+    let searchQuery = { creator: id };
     if (q) {
         searchQuery.title = { $regex: q, $options: "i" };
     }
 
-    const alldocs = await Docs.aggregate([
-        { $match: searchQuery },
-        // { $sort: { "createdAt": -1 } },
-        // { $skip: page * limit },
-        // { $limit: Number(limit) },
-    ])
+    const alldocs = await Docs.find({ creator: id })
+    .sort({ createdAt: -1 })
+    .skip(page * limit)
+    .limit(Number(limit));
+    
+    // Docs.aggregate([
+    //     { $match: {creator: id} },
+    //     { $sort: { "createdAt": -1 } },
+    //     { $skip: page * limit },
+    //     { $limit: Number(limit) },
+    // ])
 
     if (!alldocs?.length && documentcount > 0) {
         return NextResponse.json({ success: false, data: { alldocs }, message: "server error to find doduments" }, { status: 500 })

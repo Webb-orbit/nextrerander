@@ -5,6 +5,7 @@ import { Tag } from '@/app/utiles/Tag';
 import { Gicon } from '@/app/utiles/Gicon'
 import { useDispatch } from 'react-redux'
 import { motion } from 'framer-motion'
+import { PickAllShares, PickToChangeShare, PickToDeleteShare } from '@/app/lib/shares';
 
 const Sharetting = () => {
   const [sharesdata, setsharesdata] = useState(null)
@@ -12,8 +13,11 @@ const Sharetting = () => {
   useEffect(() => {
     (async () => {
       try {
-        const data = await Sharebase.getallshares()
-        const res = data.data.data.data
+        const data = await PickAllShares()
+        if (!data.success) {
+          throw new Error(data.message)
+        }
+        const res = data.data
         setsharesdata(res)
         console.log(res);
       } catch (error) {
@@ -24,12 +28,13 @@ const Sharetting = () => {
 
   const deletefun = async (id) => {
     try {
-      const deleteing = await Sharebase.deleteshare(id)
-      const removearr = sharesdata.filter((e)=> id !== e._id)
-      if (deleteing) {
-        setsharesdata(removearr)
-        // dispatch(showtoast({ title: "your share deleted", readonly: true, icon: "home", timeout: 5000, color: "red-600", bgcolor: "neutral-900", position: "bottom_right" }))
+      const deleteing = await PickToDeleteShare(id)
+      const removearr = sharesdata.filter((e) => id !== e._id)
+      if (!deleteing.success) {
+        throw new Error(data.message)
       }
+      setsharesdata(removearr)
+      // dispatch(showtoast({ title: "your share deleted", readonly: true, icon: "home", timeout: 5000, color: "red-600", bgcolor: "neutral-900", position: "bottom_right" }))
     } catch (error) {
       console.log(error);
       // dispatch(showtoast({ title: "opps", description: "something wrong when deleteing share", icon: "home", timeout: 5000, color: "red-600", bgcolor: "neutral-900", position: "bottom_right" }))
@@ -69,16 +74,16 @@ const Sharecard = ({ data, deletefun }) => {
 
   const updateprivate = async () => {
     try {
-      const up = await Sharebase.updateshare(data._id, { privated: !data.privated })
-      if (up) {
-        console.log(up.data.data.privated);
-        
-        setisprivate(up.data.data.privated)
-        dispatch(showtoast({ title: "success", description: `${data?.combinedata.title.substring(0, 10)}... is updaterd`, icon: "error", timeout: 3000, color: "-emerald-600", bgcolor: "neutral-900", position: "bottom_right" }))
+      const up = await PickToChangeShare(data._id, { privated: !data.privated })
+      if (!up.success) {
+        throw new Error(data.message)
       }
+      console.log(up.data.privated);
+      setisprivate(up.data.privated)
+      // dispatch(showtoast({ title: "success", description: `${data?.combinedata.title.substring(0, 10)}... is updaterd`, icon: "error", timeout: 3000, color: "-emerald-600", bgcolor: "neutral-900", position: "bottom_right" }))
     } catch (error) {
       console.log(error);
-      dispatch(showtoast({ title: "update not found", icon: "error", timeout: 3000, color: "-red-600", bgcolor: "neutral-900", position: "bottom_right" }))
+      // dispatch(showtoast({ title: "update not found", icon: "error", timeout: 3000, color: "-red-600", bgcolor: "neutral-900", position: "bottom_right" }))
     }
   }
 

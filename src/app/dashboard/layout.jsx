@@ -17,7 +17,7 @@ const Page = ({children}) => {
       (async () => {
         try {
           const clinet = await PickGetUser()
-          if(!client.success){
+          if(!clinet.success){
             throw new Error(clinet.message)
           }
           const response = clinet.data

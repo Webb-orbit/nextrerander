@@ -1,5 +1,5 @@
 "use client"
-import React,{ useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Optionbox from '@/app/utiles/Optionbox';
 import { setrandercompo } from '@/app/store/dashslice';
@@ -7,10 +7,14 @@ import Togglebtn from '@/app/utiles/Togglebtn';
 import Buttons from '@/app/utiles/Buttons';
 import { Gicon } from '@/app/utiles/Gicon';
 import { QRCodeSVG } from 'qrcode.react';
+import { PickOneDoc } from '@/app/lib/docs';
+import { PickCreateShare, PickOneShare } from '@/app/lib/shares';
 
-const Sharebox = ({params}) => {
+const Sharebox = ({ params }) => {
+    console.log(params);
+    
     const dispatch = useDispatch()
-    const {docid} = React.use(params)
+    const { docid } = React.use(params)
     const [shared, setshared] = useState(null)
     const [shareinfo, setshareinfo] = useState(null)
     const [sharepri, setsharepri] = useState(false)
@@ -19,18 +23,20 @@ const Sharebox = ({params}) => {
     useEffect(() => {
         (async () => {
             try {
-                const shareed = await Docsbase.getonedocument(docid)
-                const respon = shareed.data.data
+                const shareed = await PickOneDoc(docid)
+                if (!shareed.success) {
+                    throw new Error(shareed.message)
+                }
+                const respon = shareed.data
                 setshared(respon.shared)
                 if (respon.shared) {
-                    const newshare = await Sharebase.getoneshare(respon.shareid)
-                    // ADD SHARE IS ON THE DOCUMENT MODEL OK
-                    const response = newshare.data.data
-
-                    console.log("ADD SHARE IS ON THE DOCUMENT MODEL OK", response);
-                    if (response) {
-                        setshareinfo(response)
+                    const newshare = await PickOneShare(respon.shareid)
+                    if (!newshare.success) {
+                        throw new Error(newshare.message)
                     }
+                    const response = newshare.data
+                    setshareinfo(response)
+                    console.log("ADD SHARE IS ON THE DOCUMENT MODEL OK", response);
                 }
             } catch (error) {
                 console.log(error);
@@ -46,13 +52,14 @@ const Sharebox = ({params}) => {
 
     const createshare = async () => {
         try {
-            const newshare = await Sharebase.addnewshare(docid, { privated: sharepri })
-            console.log("new share", newshare);
-            const respon = newshare.data.data
-            if (newshare) {
-                setshared(true)
-                setshareinfo(respon)
+            const newshare = await PickCreateShare(docid, { privated: sharepri })
+            if (!newshare.success) {
+                throw new Error(newshare.message)
             }
+            console.log("new share", newshare);
+            const respon = newshare.data
+            setshared(true)
+            setshareinfo(respon)
 
         } catch (error) {
             console.log(error);

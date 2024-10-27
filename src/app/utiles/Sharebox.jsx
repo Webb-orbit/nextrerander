@@ -9,12 +9,12 @@ import { Gicon } from '@/app/utiles/Gicon';
 import { QRCodeSVG } from 'qrcode.react';
 
 const Sharebox = ({params}) => {
-    const dispatch = useDispatch()
-    const {docid} = React.use(params)
-    const [shared, setshared] = useState(null)
-    const [shareinfo, setshareinfo] = useState(null)
-    const [sharepri, setsharepri] = useState(false)
-    const [showqr, setshowqr] = useState(false)
+    const dispatch = useDispatch();
+    // const {docid} = React.use(params);
+    const [shared, setshared] = useState(null);
+    const [shareinfo, setshareinfo] = useState(null);
+    const [sharepri, setsharepri] = useState(false);
+    const [showqr, setshowqr] = useState(false);
 
     // useEffect(() => {
     //     (async () => {

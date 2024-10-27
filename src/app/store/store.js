@@ -8,9 +8,9 @@ export const store = configureStore({
         clientstore: clientslice,
         dashstore: dashslice,
     },
-    devTools: true,
     middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware({
             serializableCheck: false,
         }),
+        devTools: true,
 })

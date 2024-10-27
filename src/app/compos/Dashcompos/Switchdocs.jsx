@@ -5,6 +5,8 @@ import { documentroute } from '@/app/store/dashslice'
 import { useEffect, useState } from 'react'
 import { Blockerror } from '@/app/utiles/Blockerror'
 import Link from 'next/link'
+import { PickAllDocs } from '@/app/lib/docs'
+import { GrFormPrevious, GrFormNext  } from "react-icons/gr";
 
 const Switchdocs = () => {
     const { documents } = useSelector(state => state.dashstore.routes)
@@ -13,39 +15,39 @@ const Switchdocs = () => {
     const [docinfo, setdocinfo] = useState({})
     const [haserror, sethaserror] = useState(false)
 
-    // useEffect(() => {
-    //     (async () => {
-    //         try {
-    //             const docs = await Docsbase.getalldocs()
-    //             if (docs?.err) {
-    //                 throw new Error("something went")
-    //             }
-    //             const response = docs.data.data
-    //             setdocumentarr(response.doc)
-    //             setdocinfo(response)
-    //             console.log(response);
-    //         } catch (error) {
-    //             sethaserror(true)
-    //             console.log(error);
-    //         }
-    //     })()
-    // }, [])
+    useEffect(() => {
+        (async () => {
+            try {
+                const docs = await PickAllDocs()
+                if (!docs?.success) {
+                    throw new Error(docs.message)
+                }
+                const response = docs.data
+                setdocumentarr(response.doc)
+                setdocinfo(response)
+                console.log(response);
+            } catch (error) {
+                sethaserror(true)
+                console.log(error);
+            }
+        })()
+    }, [])
 
 
-    // const nextpage = async (naxtpagec) => {
-    //     try {
-    //         console.log("run", naxtpagec);
-    //         const docs = await Docsbase.getalldocs(naxtpagec)
-    //         if (docs?.err) {
-    //             throw new Error(docs.message)
-    //         }
-    //         const response = docs.data.data
-    //         setdocumentarr(response.doc)
-    //         setdocinfo(response)
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
+    const nextpage = async (naxtpagec) => {
+        try {
+            console.log("run", naxtpagec);
+            const docs = await Docsbase.getalldocs(naxtpagec)
+            if (!docs?.success) {
+                throw new Error(docs.message)
+            }
+            const response = docs.data
+            setdocumentarr(response.doc)
+            setdocinfo(response)
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
 
     return documents ? (
@@ -66,7 +68,7 @@ const Switchdocs = () => {
                                             <Link
                                                 key={e._id}
                                                 className='py-2 px-3 h-[5rem] w-full truncate rounded-md bg-neutral-900 relative hover:bg-neutral-800'
-                                                to={`/doc/${e._id}`}>
+                                                href={`/doc/${e._id}`}>
                                                     <p className=' truncate'>{e.title}</p>
                                                     <p className=' absolute bottom-2 right-2 text-neutral-400 text-[0.7rem] font-medium'>{e.createdAt?.substring(0,10)}</p>
                                                 </Link>
@@ -78,11 +80,11 @@ const Switchdocs = () => {
                                             <button
                                                 disabled={docinfo.page == 0}
                                                 onClick={() => nextpage(docinfo.page - 1)}
-                                                className=' font-medium uppercase text-[0.7rem] py-0 rounded-sm px-1 disabled:text-neutral-400 flex items-center hover:text-neutral-300 '><Gicon icon={"arrow_back_ios_new"} />prev</button>
+                                                className=' font-medium uppercase text-[0.7rem] py-0 rounded-sm px-1 disabled:text-neutral-400 flex items-center hover:text-neutral-300 '><GrFormPrevious />prev</button>
                                             <p className='text-[0.7rem font-medium]'>{docinfo.page}</p>
                                             <button
                                                 onClick={() => nextpage(docinfo.page + 1)}
-                                                disabled={!docinfo.hasmore} className=' font-medium uppercase text-[0.7rem] py-0 rounded-sm px-1 disabled:text-neutral-400 flex items-center hover:text-neutral-300 '>next<Gicon icon={"arrow_forward_ios"} /></button>
+                                                disabled={!docinfo.hasmore} className=' font-medium uppercase text-[0.7rem] py-0 rounded-sm px-1 disabled:text-neutral-400 flex items-center hover:text-neutral-300 '>next<GrFormNext /></button>
                                         </div>
                                     </div>
                                 </div>

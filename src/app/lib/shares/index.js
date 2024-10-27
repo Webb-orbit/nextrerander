@@ -1,4 +1,4 @@
-export async function PickCreateShare(docid, privated) {
+export async function PickCreateShare(docid, {privated}) {
     if (!privated) {
         throw new Error('first set your share status');
     }
@@ -55,9 +55,9 @@ export async function PickToDeleteShare(shareid) {
     }
 }
 
-export async function PickAllDocs() {
+export async function PickAllShares() {
     try {
-        const getalls = await fetch(`/api/share/alldocs`, { method: "GET" })
+        const getalls = await fetch(`/api/share/allshares`, { method: "GET" })
         const response = await getalls.json()
         console.log(response);
         return response

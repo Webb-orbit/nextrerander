@@ -55,9 +55,9 @@ const Itemlink = ({ children, classes, ...rest }) => {
   )
 }
 
-const Itembutton = ({ children, classes, ...rest }) => {
+const Itembutton = ({ children, className, ...rest }) => {
   return (
-    <button className={cn("text-white roboto tracking-wide font-light text-[0.9rem] capitalize hover:bg-neutral-700 px-2 py-1 text-left rounded-sm", classes)} {...rest}>{children}</button>
+    <button className={cn("text-white roboto tracking-wide font-light text-[0.9rem] capitalize hover:bg-neutral-700 px-2 py-1 text-left rounded-sm", className)} {...rest}>{children}</button>
   )
 }
 

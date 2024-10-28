@@ -8,8 +8,8 @@ import { NextResponse } from "next/server";
 await connectdb()
 
 export async function POST(req, { params }) {
-    const {privated} = await req.json()
-    const documentid =  params.docid
+    const { privated } = await req.json()
+    const documentid = params.docid
     const id = await getokenid()
     if (!isValidObjectId(documentid)) {
         return NextResponse.json({ success: false, message: "document id is required" }, { status: 400 })
@@ -50,5 +50,5 @@ export async function POST(req, { params }) {
     }
 
 
-    return NextResponse.json({ success: true, data:{...newshare?._doc, shareddocu}, message: "new share are ready" }, { status: 200 })
+    return NextResponse.json({ success: true, data: { ...newshare?._doc, shareddocu }, message: "new share are ready" }, { status: 200 })
 }

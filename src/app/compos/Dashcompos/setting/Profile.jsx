@@ -82,7 +82,7 @@ const Profile = () => {
           <input
             onChange={updateavatar}
             type="file" name="avatar" className=' hidden' id={userinfo?._id} />
-          <label htmlFor={userinfo?._id} className='w-7 h-7 flex items-center justify-center bg-green-500 text-black absolute  cursor-pointer top-0 right-2 rounded-full'><MdOutlineModeEdit /></label>
+          <label htmlFor={userinfo?._id} className='w-7 h-7 shadow-2xl shadow-emerald-500/90 flex items-center justify-center bg-green-500/95 text-black absolute  cursor-pointer top-0 right-2 rounded-full'><MdOutlineModeEdit /></label>
         </div>
         <div>
           <h3 className=' text-[1.4rem] font-medium'>{userinfo?.username}</h3>

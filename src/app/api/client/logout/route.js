@@ -27,7 +27,6 @@ export async function GET() {
 
     return NextResponse.json({
         success: true,
-        data: {},
         message: "you are log out"
     },{status: 200})
 }

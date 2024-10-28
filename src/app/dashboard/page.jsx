@@ -1,7 +1,6 @@
 "use client"
 import { useEffect, useState } from 'react'
 import { Combo, Comboitems, Selectitem } from '@/app/utiles/Combo'
-import { Gicon } from '@/app/utiles/Gicon'
 import Buttons from '@/app/utiles/Buttons'
 import { Docard } from '@/app/utiles/Docard'
 import { Minwidth } from '@/app/utiles/Minwidth'

@@ -11,11 +11,11 @@ const shareschema = new Schema({
     },
     shareddoc: {
         type: Schema.Types.ObjectId,
-        ref: "Docs"
+        ref: "docs"
     },
     creator: {
         type: Schema.Types.ObjectId,
-        ref: "Client"
+        ref: "clients"
     }
 }, {timestamps: true})
 

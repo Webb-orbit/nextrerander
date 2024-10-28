@@ -80,7 +80,7 @@ const Sharecard = ({ data, deletefun }) => {
       }
       console.log(up.data.privated);
       setisprivate(up.data.privated)
-      // dispatch(showtoast({ title: "success", description: `${data?.combinedata.title.substring(0, 10)}... is updaterd`, icon: "error", timeout: 3000, color: "-emerald-600", bgcolor: "neutral-900", position: "bottom_right" }))
+      // dispatch(showtoast({ title: "success", description: `${data?.shareddoc.title.substring(0, 10)}... is updaterd`, icon: "error", timeout: 3000, color: "-emerald-600", bgcolor: "neutral-900", position: "bottom_right" }))
     } catch (error) {
       console.log(error);
       // dispatch(showtoast({ title: "update not found", icon: "error", timeout: 3000, color: "-red-600", bgcolor: "neutral-900", position: "bottom_right" }))
@@ -100,8 +100,8 @@ const Sharecard = ({ data, deletefun }) => {
       className=' group border-b-[1px] border-t-[1px] py-2 border-transparent duration-75 hover:border-neutral-400/50 grid grid-cols-5 w-full capitalize text-[1rem] font-semibold text-neutral-400 cursor-default'>
 
       <div className=' col-span-2 w-[90%]  flex flex-col justify-between'>
-        <Link href={`${import.meta.env.VITE_BASE_URL}/doc/${data.combinedata._id}`} className='truncate'>{data.combinedata.title}</Link>
-        <Link href={`${import.meta.env.VITE_BASE_URL}/share/${data._id}`} target='_blank' className='truncate lowercase text-[0.7rem] hover:text-emerald-500'>{`${import.meta.env.VITE_BASE_URL}/share/${data._id}`}</Link>
+        <Link href={`${process.env.NEXT_PUBLIC_FRONT_BASE_URL}/doc/${data.shareddoc._id}`} className='truncate'>{data.shareddoc.title}</Link>
+        <Link href={`${process.env.NEXT_PUBLIC_FRONT_BASE_URL}/share/${data._id}`} target='_blank' className='truncate lowercase text-[0.7rem] hover:text-emerald-500'>{`${process.env.NEXT_PUBLIC_FRONT_BASE_URL}/share/${data._id}`}</Link>
       </div>
 
       <div className=' flex items-center justify-start'>

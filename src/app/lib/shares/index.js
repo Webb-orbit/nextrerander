@@ -1,7 +1,4 @@
 export async function PickCreateShare(docid, {privated}) {
-    if (!privated) {
-        throw new Error('first set your share status');
-    }
     try {
         const create = await fetch(`/api/share/create/${docid}`, {
             method: "POST",

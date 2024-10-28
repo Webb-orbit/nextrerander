@@ -56,7 +56,6 @@ const Docoptions = () => {
                             classes={`w-[15rem] py-[0.5rem] flex items-center group gap-3 hover:bg-neutral-800 ${e.className}`}
                             key={e.id}>
                             {e.icon}
-                            {/* <Gicon classes={"text-[1.3rem] text-neutral-400 group-hover:text-neutral-100"} icon={e.icon} />  */}
                             <p className='duration-75 group-hover:translate-x-1 text-[0.9rem]'>{e.text}</p>
                         </Itembutton>
                     ))}

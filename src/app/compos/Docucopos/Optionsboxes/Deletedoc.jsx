@@ -1,15 +1,17 @@
+"use client"
 import Optionbox from '@/app/utiles/Optionbox'
 import { useDispatch } from 'react-redux'
 import { deleteoption, setrandercompo } from '@/app/store/dashslice'
 import Buttons from '@/app/utiles/Buttons'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 import { PickToDeleteDoc } from '@/app/lib/docs'
 import React from 'react'
+import { useParams } from 'next/navigation'
 
-const Deletedoc = ({params}) => {
-    const dispatch = useDispatch()
-    const {docid} = React.use(params)
+const Deletedoc = () => {
     const router = useRouter()
+    const dispatch = useDispatch()
+    const {docid} = useParams()
 
     const deletehandel = async () => {
         try {

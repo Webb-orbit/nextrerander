@@ -1,5 +1,5 @@
-import Logo from '../../Logo'
-import Buttons from '../../../utiles/Buttons'
+import Logo from '@/app/utiles/Logo'
+import Buttons from '@/app/utiles/Buttons'
 
 const Sharenavbar = ({ data }) => {
     return (

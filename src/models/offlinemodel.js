@@ -10,7 +10,7 @@ const offdocSchema = new Schema({
     },
     creator:{
         type: Schema.Types.ObjectId,
-        ref: "Client"
+        ref: "clients"
     },
     ipadd:{
         type: String,

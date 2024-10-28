@@ -5,16 +5,18 @@ import Optionbox from '@/app/utiles/Optionbox';
 import { setrandercompo } from '@/app/store/dashslice';
 import Togglebtn from '@/app/utiles/Togglebtn';
 import Buttons from '@/app/utiles/Buttons';
-import { Gicon } from '@/app/utiles/Gicon';
 import { QRCodeSVG } from 'qrcode.react';
 import { PickOneDoc } from '@/app/lib/docs';
 import { PickCreateShare, PickOneShare } from '@/app/lib/shares';
+import { useParams } from 'next/navigation';
+import { IoQrCodeOutline } from "react-icons/io5";
 
-const Sharebox = ({ params }) => {
-    console.log(params);
+const Sharebox = () => {
+    const {docid} = useParams()
+    console.log(docid);
     
     const dispatch = useDispatch()
-    const { docid } = React.use(params)
+    
     const [shared, setshared] = useState(null)
     const [shareinfo, setshareinfo] = useState(null)
     const [sharepri, setsharepri] = useState(false)
@@ -68,7 +70,7 @@ const Sharebox = ({ params }) => {
     }
 
     const copyurl = () => {
-        navigator.clipboard.writeText(`${import.meta.env.VITE_BASE_URL}/share/${shareinfo?._id}`)
+        navigator.clipboard.writeText(`${process.env.NEXT_PUBLIC_FRONT_BASE_URL}/share/${shareinfo?._id}`)
     }
 
     return (
@@ -85,11 +87,11 @@ const Sharebox = ({ params }) => {
                             <div className='flex flex-col justify-between h-full gap-3'>
                                 <div className=' flex items-center justify-between  px-1'>
                                     <div className='py-2 flex  items-center justify-between outline-1   outline  rounded-md px-1  w-[80%]  '>
-                                        <input type="text" value={`${import.meta.env.VITE_BASE_URL}/share/${shareinfo?._id}`} readOnly className={` bg-neutral-950  outline-none border-none text-[0.8rem] w-full text-neutral-200 truncate rounded-md py-1 px-2  placeholder:text-[0.9rem] `} />
+                                        <input type="text" value={`${process.env.NEXT_PUBLIC_FRONT_BASE_URL}/share/${shareinfo?._id}`} readOnly className={` bg-neutral-950  outline-none border-none text-[0.8rem] w-full text-neutral-200 truncate rounded-md py-1 px-2  placeholder:text-[0.9rem] `} />
                                         <Buttons onClick={copyurl} bclass={" text-nowrap text-[0.7rem] bg-neutral-300 text-black hover:bg-neutral-400 hover:text-black"}>copy url</Buttons>
                                     </div>
                                     <div>
-                                        <button onClick={() => setshowqr(pre => !pre)} className=' hover:bg-zinc-800 w-8 h-8 flex items-center justify-center rounded-s-sm'><Gicon icon={"qr_code_2_add"} classes={"text-[1.6rem]"} /></button>
+                                        <button onClick={() => setshowqr(pre => !pre)} className=' hover:bg-zinc-800 w-8 h-8 flex items-center justify-center rounded-s-sm'><IoQrCodeOutline /></button>
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +118,7 @@ const Sharebox = ({ params }) => {
                 <div className=' h-full flex items-center justify-center'>
                     <QRCodeSVG
                         className='p-2 bg-black rounded-md scale-[1.2]'
-                        value={`${import.meta.env.VITE_BASE_URL}/share/${shareinfo?._id}`} />
+                        value={`${process.env.NEXT_PUBLIC_FRONT_BASE_URL}/share/${shareinfo?._id}`} />
                 </div>
                 <p className='text-[0.6rem] text-zinc-500 noto-sans'>Use phone camera to scan the QR code and instantly access this on other devices.</p>
             </div>}

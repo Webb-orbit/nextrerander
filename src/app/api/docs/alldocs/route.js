@@ -36,7 +36,7 @@ export async function POST(req) {
     .skip(page * limit)
     .limit(Number(limit));
     
-    // Docs.aggregate([
+    //   const alldocs = await Docs.aggregate([
     //     { $match: {creator: id} },
     //     { $sort: { "createdAt": -1 } },
     //     { $skip: page * limit },

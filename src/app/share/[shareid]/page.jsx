@@ -1,12 +1,12 @@
+"use client"
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { showtoast } from '../../store/Toastslice';
-import Sharebase from '../../api/Share';
-import { Pageloading } from '../../utiles/Pageloading';
-import Sharenavbar from './sharepagecompos/sharenavbar';
-import Shareheader from './sharepagecompos/Shareheader';
-import { Minwidth } from '../../utiles/Minwidth';
+import { Pageloading } from '@/app/utiles/Pageloading';
+import Sharenavbar from '@/app/compos/Docucopos/sharepagecompos/sharenavbar';
+import Shareheader from '@/app/compos/Docucopos/sharepagecompos/Shareheader';
+import { Minwidth } from '@/app/utiles/Minwidth';
 import plaintohtml from 'markdown-to-htm';
+import { PickOneShare, PickToChangeShare } from '@/app/lib/shares';
 
 const Sharepage = ({params}) => {
     const { shareid } = React.use(params)
@@ -19,19 +19,22 @@ const Sharepage = ({params}) => {
         let timeout;
         (async () => {
             try {
-                const share = await Sharebase.getoneshare(shareid)
-                const shareres = share.data.data
+                const share = await PickOneShare(shareid)
+                if(!share.success){
+                    throw new Error(share.message)
+                }
+                const shareres = share.data
                 setsharedata(shareres)
                 console.log(shareres);
                 timeout = setTimeout(() => {
                     (async () => {
-                        await Sharebase.updateshare(shareres._id, { views: eval(shareres.views + 1) })
+                        await PickToChangeShare(shareres._id, { views: eval(shareres.views + 1) })
                     })()
                 }, 1000);
             } catch (error) {
                 seterror(true)
                 console.log(error);
-                dispatch(showtoast({ title: "document not found", icon: "home", timeout: 5000, color: "red-600", bgcolor: "neutral-900", position: "bottom_left" }))
+                // dispatch(showtoast({ title: "document not found", icon: "home", timeout: 5000, color: "red-600", bgcolor: "neutral-900", position: "bottom_left" }))
             }
         })()
 

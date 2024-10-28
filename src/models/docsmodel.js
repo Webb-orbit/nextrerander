@@ -13,7 +13,7 @@ const docschema = new Schema({
     },
     creator:{
         type: Schema.Types.ObjectId,
-        ref: "Client"
+        ref: "clients"
     },
     shared:{
         type : Boolean,
@@ -21,7 +21,7 @@ const docschema = new Schema({
     },
     shareid:{
         type: Schema.Types.ObjectId,
-        ref: "Shared",
+        ref: "shareds",
         default: null
     }
 }, {timestamps: true})

@@ -6,15 +6,15 @@ import Buttons from '@/app/utiles/Buttons'
 import { Comboitems, Itembutton, Itemlink } from '@/app/utiles/Combo'
 import { useDispatch, useSelector } from 'react-redux'
 import { createroute, documentroute, setrandercompo} from '@/app/store/dashslice'
-import Sharebox from '@/app/utiles/Sharebox'
+import Sharebox from '@/app/compos/Docucopos/Optionsboxes/Sharebox'
 import Setting from '@/app/compos/Dashcompos/Setting'
-import { usePathname } from 'next/navigation'
+import { useParams, usePathname } from 'next/navigation'
 import { BiHomeAlt, BiAddToQueue, BiSolidBookContent , BiDoughnutChart  } from "react-icons/bi";
 import { MdDragIndicator, MdMoreVert, MdOutlineDocumentScanner   } from "react-icons/md";
 
-const Dashnavbar = ({ data, params }) => {
+const Dashnavbar = ({ data }) => {
     const pathname = usePathname()
-    const {docid} = params ?React.use(params): "hello params" 
+    const {docid} = useParams() 
     const [docinfoactive, setdocinfoactive] = useState(false)
     const [moreopsactive, setmoreopsactive] = useState(false)
     const dispatch = useDispatch()

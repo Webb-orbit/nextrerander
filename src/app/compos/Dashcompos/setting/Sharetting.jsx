@@ -100,7 +100,7 @@ const Sharecard = ({ data, deletefun }) => {
       className=' group border-b-[1px] border-t-[1px] py-2 border-transparent duration-75 hover:border-neutral-400/50 grid grid-cols-5 w-full capitalize text-[1rem] font-semibold text-neutral-400 cursor-default'>
 
       <div className=' col-span-2 w-[90%]  flex flex-col justify-between'>
-        <Link href={`${process.env.NEXT_PUBLIC_FRONT_BASE_URL}/doc/${data.shareddoc._id}`} className='truncate'>{data.shareddoc.title}</Link>
+        <Link href={`/doc/${data.shareddoc._id}`} className='truncate'>{data.shareddoc.title}</Link>
         <Link href={`${process.env.NEXT_PUBLIC_FRONT_BASE_URL}/share/${data._id}`} target='_blank' className='truncate lowercase text-[0.7rem] hover:text-emerald-500'>{`${process.env.NEXT_PUBLIC_FRONT_BASE_URL}/share/${data._id}`}</Link>
       </div>
 

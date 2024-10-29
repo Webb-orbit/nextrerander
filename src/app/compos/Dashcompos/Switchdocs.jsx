@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import { Blockerror } from '@/app/utiles/Blockerror'
 import Link from 'next/link'
 import { PickAllDocs } from '@/app/lib/docs'
+import { RxCross2 } from "react-icons/rx";
 import { GrFormPrevious, GrFormNext  } from "react-icons/gr";
 
 const Switchdocs = () => {
@@ -55,7 +56,7 @@ const Switchdocs = () => {
             <div className=' flex flex-col justify-stretch w-[25%]  h-[80vh] bg-black px-5 py-5 rounded-md outline-1 outline outline-neutral-500/45  gap-5 overflow-y-scroll scroll'>
                 <div className=' flex items-center justify-between'>
                     <h3 className='text-[1rem] capitalize font-medium '>create document</h3>
-                    <Gicon onClick={() => dispatch(documentroute(false))} classes={"cursor-pointer"} icon={"cancel"} />
+                    <span onClick={() => dispatch(documentroute(false))} className=' cursor-pointer'><RxCross2/></span>
                 </div>
 
                 <div>

@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { cn } from '../utiles/utile'
-import { Gicon } from '../utiles/Gicon'
 import { RxCross2 } from "react-icons/rx";
 
 const Optionbox = ({ children, classes, container, closehandel, dialog }) => {

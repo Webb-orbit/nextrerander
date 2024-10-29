@@ -48,7 +48,7 @@ const Dashnavbar = ({ data }) => {
                     <Comboitems 
                     active={moreopsactive} classes={"absolute bg-neutral-950 left-[20rem] top-14  w-[13rem] p-1 z-[9999]"}>
                         <div className='mingzat flex flex-col gap-1 select-none '>
-                            <Itemlink href={"/dashboard"}
+                            <Itemlink prefetch={true} href={"/dashboard"}
                                 classes={"flex items-center group gap-3 hover:bg-neutral-800"}
                             >
                                 <BiHomeAlt/>
@@ -56,13 +56,13 @@ const Dashnavbar = ({ data }) => {
                             </Itemlink>
                             <Itembutton
                                 onClick={() => dispatch(createroute())}
-                                classes={"flex items-center group gap-3 hover:bg-neutral-800"}
+                                className={"flex items-center group gap-3 hover:bg-neutral-800"}
                             ><BiAddToQueue />
                                 <p className=' duration-75 group-hover:translate-x-1 text-[0.8rem]'>new document</p>
                             </Itembutton>
                             <Itembutton
                                 onClick={() => dispatch(documentroute())}
-                                classes={"flex items-center group gap-3 hover:bg-neutral-800"}
+                                className={"flex items-center group gap-3 hover:bg-neutral-800"}
                             ><BiSolidBookContent  />
                                 <p className=' duration-75 group-hover:translate-x-1 text-[0.8rem]'>switch document</p>
                             </Itembutton>
@@ -71,7 +71,7 @@ const Dashnavbar = ({ data }) => {
                         <div className='mingzat flex flex-col gap-1 select-none'>
                             <Itembutton
                                 onClick={() => dispatch(setrandercompo(compobj.settingcompo))}
-                                classes={"flex items-center group gap-3 hover:bg-neutral-800"}
+                                className={"flex items-center group gap-3 hover:bg-neutral-800"}
                             ><BiDoughnutChart />
                                 <p className=' duration-75 group-hover:translate-x-1 text-[0.8rem]'>settings</p>
                             </Itembutton>

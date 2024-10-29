@@ -12,15 +12,11 @@ export const Skashbordcards = ({ number }) => {
     setarray(make)
   }, [])
   return (
-    <div className='flex flex-wrap justify-start gap-5'>
+    <div className='flex flex-wrap justify-star justify-between gap-5'>
       {array.map((e) => (
-        <h3  key={e} >sklition</h3>
-        // <Skeleton
-        //   key={e}
-        //   sx={{ bgcolor: 'grey.900' }}
-        //   variant="rectangular"
-        //   className='w-[30%] min-h-[11rem] relative rounded-md p-3'
-        // />
+        <div 
+        className=' w-[30%] h-44 bg-neutral-900 rounded-md p-3 animate-pulse'
+        key={e}></div>
       ))}
     </div>
   )

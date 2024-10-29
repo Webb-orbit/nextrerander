@@ -34,7 +34,7 @@ const Createdoc = () => {
     }
     return createnew ? (
         <Optionbox
-            dialog={"Are you sure?"}
+            dialog={"create orbit"}
             classes={"static w-[45%] min-h-[20rem] h-[50vh] "}
             closehandel={closehandelfun}
             container={"flex backdrop-blur-sm items-center  z-[999]  justify-center"}>

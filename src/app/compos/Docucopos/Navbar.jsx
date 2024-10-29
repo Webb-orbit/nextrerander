@@ -39,7 +39,7 @@ const Navbar = ({ auther }) => {
                 {status ? (
                     <>
                         <div className=" flex items-center gap-5">
-                            <Link href={"/dashboard"} className=" select-none capitalize text-zinc-500  font-medium hover:text-zinc-400 text-[0.9rem]">dashbord</Link>
+                            <Link prefetch={true} href={"/dashboard"} className=" select-none capitalize text-zinc-500  font-medium hover:text-zinc-400 text-[0.9rem]">dashbord</Link>
                             {auther?.logo ? <span className="w-9 h-9 rounded-full relative" onClick={() => setactivenav(pre => !pre)}><Image alt="logo"  src={auther.logo} fill className=" select-none object-cover object-center  cursor-pointer  " /> </span>: (
                                 <div onClick={() => setactivenav(pre => !pre)} className="w-9 h-9  rounded-full bg-zinc-700 cursor-pointer flex items-center justify-center select-none text-[1.2rem] font-medium capitalize">{auther?.username?.substring(0, 1)}</div>)}
                         </div>

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect, useState } from 'react'
 import { Combo, Comboitems, Selectitem } from '@/app/utiles/Combo'
 import Buttons from '@/app/utiles/Buttons'
@@ -137,7 +137,7 @@ const Page = () => {
                                         </div>
                                         <div className='flex items-center justify-between py-7'>
                                             <p className='text-neutral-300 uppercase text-[0.9rem] font-medium'>{`${documents.length} docs / ${docinfo.count}`}</p>
-                                            <div className=' flex gap-5'>
+                                            {docinfo?.page && <div className=' flex gap-5'>
                                                 <button 
                                                 disabled={docinfo.page==0}
                                                 onClick={()=> nextpage(docinfo.page-1)}
@@ -146,7 +146,7 @@ const Page = () => {
                                                 <button 
                                                 onClick={()=> nextpage(docinfo.page+1)}
                                                 disabled={!docinfo.hasmore} className=' font-medium uppercase text-[0.9rem] py-0 rounded-sm px-1 disabled:text-neutral-400 flex items-center hover:text-neutral-300 '>next<GrFormNext/></button>
-                                            </div>
+                                            </div>}
                                         </div>
                                     </div>
 

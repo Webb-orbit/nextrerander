@@ -54,7 +54,7 @@ export async function PickToDeleteShare(shareid) {
 
 export async function PickAllShares() {
     try {
-        const getalls = await fetch(`/api/share/allshares`, { method: "GET" })
+        const getalls = await fetch(`/api/share/allshares`, { method: "GET", cache: "force-cache"})
         const response = await getalls.json()
         console.log(response);
         return response

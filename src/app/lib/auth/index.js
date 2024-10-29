@@ -1,3 +1,4 @@
+import { revalidateTag } from "next/cache";
 
 export async function PickSignup(email, username, password, logoupload) {
     if (!email || !username || !password || !logoupload) {
@@ -47,7 +48,7 @@ export async function PickLogin(email, password) {
 
 export async function PickGetUser() {
     try {
-        const user = await fetch("/api/client/getuser", {method: 'GET'})
+        const user = await fetch("/api/client/getuser", {method: 'GET', cache: 'force-cache', next:{tags:['re','ve']}})
         const response = await user.json()
         return response
     } catch (error) {
@@ -90,6 +91,17 @@ export async function PickCAvater(newphoto) {
     }
 }
 
+async function PickRevalidate(params) {
+    const data = await fetch('/api/revalidate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tag: params }),
+      });
+      const response = await data.json();
+      console.log(response);
+      return response
+}
+
 export async function PickCDetiles(email, username) {
     if (!email && !username) {
         throw new Error("one feald is required")
@@ -100,8 +112,8 @@ export async function PickCDetiles(email, username) {
             headers:{"Content-Type": "application/json"},
             body: JSON.stringify({email, username}),
         })
-
         const response = await update.json()
+        await PickRevalidate('re')
         return response
     } catch (error) {
         console.log(error);

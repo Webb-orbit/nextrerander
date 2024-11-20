@@ -88,16 +88,6 @@ export async function PickCAvater(newphoto) {
     }
 }
 
-async function PickRevalidate(params) {
-    const data = await fetch('/api/revalidate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tag: params }),
-      });
-      const response = await data.json();
-      console.log(response);
-      return response
-}
 
 export async function PickCDetiles(email, username) {
     if (!email && !username) {
@@ -110,7 +100,6 @@ export async function PickCDetiles(email, username) {
             body: JSON.stringify({email, username}),
         })
         const response = await update.json()
-        // await PickRevalidate('re')
         return response
     } catch (error) {
         console.log(error);

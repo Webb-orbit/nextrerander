@@ -1,6 +1,6 @@
 "use client"
 import { useEffect, useRef, useState } from "react"
-import Codebtn from "./codebtn"
+import Codebtn from "@/app/utiles/Codebtn"
 import { FiClipboard } from "react-icons/fi";
 import { LuClipboardCheck } from "react-icons/lu";
 import { TbTextWrap, TbTextWrapDisabled } from "react-icons/tb";

@@ -12,6 +12,6 @@ export async function connectdb() {
     } catch (error) {
         console.log(error);
         console.log("MONGO NOT CONNECT");
-        process.exit(1)
+        // process.exit(1)
     }
 }

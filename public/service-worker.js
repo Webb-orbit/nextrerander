@@ -6,14 +6,14 @@ const addResourcesToCache = async (resources) => {
 self.addEventListener("install", (event) => {
   event.waitUntil(
     addResourcesToCache([
-      '/', '/index.jsx'
+      '/','/_next/static/'
     ]),
   );
 });
 
-
-
 self.addEventListener('fetch', (event) => {
+  console.log("fetch event-: ", event);
+  
   if (event.request.method === 'GET') {
     event.respondWith(
       caches.match(event.request).then((response) => {

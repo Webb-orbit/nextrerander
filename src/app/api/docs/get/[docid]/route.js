@@ -7,9 +7,9 @@ import { NextResponse } from "next/server";
 
 await connectdb()
 export async function GET(req, {params}) {
-    const documentid =  params.docid
+    const {docid} = await params
     const id = await getokenid()
-    if (!isValidObjectId(documentid)) {
+    if (!isValidObjectId(docid)) {
         return NextResponse.json({success: false, message: "document id is required"}, {status: 400})
     }
     if (!id) {
@@ -19,7 +19,7 @@ export async function GET(req, {params}) {
     const clientdoc = await Docs.findOne({
         $and: [
             { creator: id },
-            { _id: documentid }
+            { _id: docid }
         ]
     })
 

@@ -1,5 +1,4 @@
 "use client"
-import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { storelogin } from '../store/userslice';
 import { Pageloading } from '../utiles/Pageloading';
@@ -7,13 +6,15 @@ import Createdoc from '../compos/Dashcompos/Createdoc';
 import Switchdocs from '@/app/compos/Dashcompos/Switchdocs'
 import { useSelector } from 'react-redux';
 import { PickGetUser } from '../lib/auth';
+import { useEffect, useState } from 'react';
 
 const Page = ({children}) => {
     const { compo } = useSelector(state => state.dashstore.randers)
+    const [loading, setloading] = useState(true)
 
-    const [loading, setloading] = useState(false)
     const dispatch = useDispatch()
-    useEffect(() => {
+  
+    useEffect(()=>{
       (async () => {
         try {
           const clinet = await PickGetUser()
@@ -31,7 +32,8 @@ const Page = ({children}) => {
           console.log(error);
         }
       })()
-    }, [])
+    },[])
+
   
     return !loading ? (
       <>

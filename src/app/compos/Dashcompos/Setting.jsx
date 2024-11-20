@@ -1,5 +1,4 @@
 "use client"
-
 import {useState } from 'react'
 import Optionbox from '@/app/utiles/Optionbox'
 import { useDispatch } from 'react-redux';
@@ -10,6 +9,7 @@ import Apikey from './setting/Apikey';
 import Sharetting from './setting/Sharetting';
 import { TbWebhook } from "react-icons/tb";
 import { CgProfile, CgListTree } from "react-icons/cg";
+import { RxCross2 } from "react-icons/rx";
 
 const Setting = () => {
     const dispatch = useDispatch()
@@ -45,11 +45,14 @@ const Setting = () => {
     return (
         <Optionbox
             dialog={"settings"}
-            container={"flex items-center justify-center backdrop-blur-sm z-[99999]"}
+            container={"flex items-center justify-center backdrop-blur-sm z-[99999] max-sm:p-0"}
             closehandel={() => dispatch(setrandercompo(null))}
-            classes={"static w-[90%] h-[90vh]"}>
-            <div className=' flex items-stretch  w-full h-full justify-between'>
-                <div className='flex fixed flex-col gap-3 w-[20%]  px-4 py-8 select-none'>
+            classes={"static max-sm:w-[100%] max-sm:h-screen"}>
+            <div className=' flex items-stretch  w-full h-full justify-between '>
+                <div className='flex fixed flex-col gap-3 w-[20%]  px-4 py-8 select-none max-sm:fixed max-sm:h-full max-sm:bg-gray-900 max-sm:left-0 max-sm:w-[85%] max-sm:z-[100]'>
+                    <div className=' hidden max-sm:flex items-end justify-end max-sm:py-2'>
+                    <button><RxCross2/></button>
+                    </div>
                     {sidenav.map((e) => (
                         <button
                             onClick={() => rendercompo(e.id)} key={e.id}
@@ -61,7 +64,7 @@ const Setting = () => {
                     ))}
                 </div>
 
-                <div className='ml-[25%] w-[80%] py-8'>
+                <div className='ml-[25%] w-[80%] py-8 max-sm:ml-0 max-sm:w-full'>
                     {selecompo}
                 </div>
             </div>

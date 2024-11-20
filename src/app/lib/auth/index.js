@@ -1,5 +1,3 @@
-import { revalidateTag } from "next/cache";
-
 export async function PickSignup(email, username, password, logoupload) {
     if (!email || !username || !password || !logoupload) {
         throw new Error('all fildes are required');
@@ -48,7 +46,7 @@ export async function PickLogin(email, password) {
 
 export async function PickGetUser() {
     try {
-        const user = await fetch("/api/client/getuser", {method: 'GET', cache: 'force-cache', next:{tags:['re','ve']}})
+        const user = await fetch("/api/client/getuser", {method: 'GET'})
         const response = await user.json()
         return response
     } catch (error) {
@@ -83,7 +81,6 @@ export async function PickCAvater(newphoto) {
             body: formdata,
         })
         const response = await updateavater.json()
-        console.log(response);
         return response
     } catch (error) {
         console.log(error);
@@ -113,7 +110,7 @@ export async function PickCDetiles(email, username) {
             body: JSON.stringify({email, username}),
         })
         const response = await update.json()
-        await PickRevalidate('re')
+        // await PickRevalidate('re')
         return response
     } catch (error) {
         console.log(error);

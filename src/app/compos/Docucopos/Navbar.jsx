@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 "use client"
 import Buttons from "@/app/utiles/Buttons"
-import { Gicon } from "@/app/utiles/Gicon"
 import Logo from "@/app/utiles/Logo"
 import { useSelector } from "react-redux"
 import { Minwidth } from "@/app/utiles/Minwidth"
@@ -11,6 +10,7 @@ import { Itemlink, Itembutton } from "@/app/utiles/Combo"
 import Image from "next/image"
 import { PickLogOut } from "@/app/lib/auth"
 import { useRouter } from "next/navigation"
+import { TbLogin2 } from "react-icons/tb";
 
 const Navbar = ({ auther }) => {
     const { status } = useSelector(state => state.clientstore)
@@ -47,7 +47,7 @@ const Navbar = ({ auther }) => {
                 ) : (
                     <Link href={"/login"}>
                         <Buttons>
-                            <Gicon icon={"login"} /> login
+                            <TbLogin2/> login
                         </Buttons>
                     </Link>
                 )}

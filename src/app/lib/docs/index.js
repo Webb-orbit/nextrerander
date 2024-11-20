@@ -46,7 +46,7 @@ export async function PickToChangeDoc(docid, { title, content, shared }) {
 
 export async function PickToDeleteDoc(docid) {
     try {
-        const deleted = await fetch(`/api/docs/d/${docid}`,{method: "DELETE"})
+        const deleted = await fetch(`/api/docs/d/${docid}`,{method: "DELETE",cache: "force-cache"})
         const response = await deleted.json()
         console.log(response);
         return response

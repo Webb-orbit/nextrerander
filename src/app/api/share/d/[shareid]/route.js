@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
 await connectdb()
 
 export async function DELETE(req, { params }) {
-    const shareid =  params.shareid
+    const {shareid} =  await params
     const id = await getokenid()
     if (!isValidObjectId(shareid)) {
         return NextResponse.json({ success: false, message: "document id is required" }, { status: 400 })

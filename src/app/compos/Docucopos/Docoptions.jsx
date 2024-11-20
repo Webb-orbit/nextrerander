@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Comboitems, Itembutton } from '../../utiles/Combo'
-import { Gicon } from '../../utiles/Gicon'
 import { useDispatch, useSelector } from 'react-redux'
 import { setrandercompo } from '../../store/dashslice'
 import Markdownop from './Optionsboxes/Markdownop'

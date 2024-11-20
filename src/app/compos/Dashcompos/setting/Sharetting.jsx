@@ -2,9 +2,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Tag } from '@/app/utiles/Tag';
-import { Gicon } from '@/app/utiles/Gicon'
 import { useDispatch } from 'react-redux'
 import { motion } from 'framer-motion'
+import { MdOutlineDelete } from "react-icons/md";
 import { PickAllShares, PickToChangeShare, PickToDeleteShare } from '@/app/lib/shares';
 
 const Sharetting = () => {
@@ -123,7 +123,7 @@ const Sharecard = ({ data, deletefun }) => {
         <p className='text-[0.9rem]'>{data?.createdAt.substring(0, 10)}</p>
         <button
           onClick={() => deletefun(data._id)}
-          className='hidden group-hover:block'><Gicon icon={"delete"} /></button>
+          className='hidden group-hover:block'><MdOutlineDelete /></button>
       </div>
 
     </motion.div>

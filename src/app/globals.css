@@ -51,8 +51,15 @@ body {
   background-color: rgb(69, 69, 69);
   border-radius: 1rem;
 }
-.scroll::-webkit-scrollbar-button{
+.scroll::-webkit-scrollbar-button, .scrollwidth::-webkit-scrollbar-button{
   display: none;
+}
+
+.scrollwidth::-webkit-scrollbar{
+  height: 0.5rem;
+}
+.scrollwidth::-webkit-scrollbar-thumb{
+  background-color: rgb(35, 35, 35);
 }
 
 .roboto {

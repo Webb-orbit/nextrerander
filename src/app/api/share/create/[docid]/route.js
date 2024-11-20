@@ -9,16 +9,16 @@ await connectdb()
 
 export async function POST(req, { params }) {
     const { privated } = await req.json()
-    const documentid = params.docid
+    const {docid} = await params
     const id = await getokenid()
-    if (!isValidObjectId(documentid)) {
+    if (!isValidObjectId(docid)) {
         return NextResponse.json({ success: false, message: "document id is required" }, { status: 400 })
     }
     if (!id) {
         return NextResponse.json({ success: false, message: "token id not found or invalid credentials" }, { status: 400 })
     }
 
-    const exeitshare = await Share.findOne({ shareddoc: documentid })
+    const exeitshare = await Share.findOne({ shareddoc: docid })
     if (exeitshare) {
         return NextResponse.json({ success: false, message: "share document is alrady exgisted" }, { status: 400 })
     }
@@ -26,7 +26,7 @@ export async function POST(req, { params }) {
     const newshare = await Share.create({
         privated,
         views: 0,
-        shareddoc: documentid,
+        shareddoc: docid,
         creator: id
     })
 
@@ -38,7 +38,7 @@ export async function POST(req, { params }) {
         {
             $and: [
                 { creator: id },
-                { _id: documentid }
+                { _id: docid }
             ]
         }, {
         shared: true,

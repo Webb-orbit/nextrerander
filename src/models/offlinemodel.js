@@ -2,7 +2,7 @@ import {model, models, Schema} from "mongoose";
 
 const offdocSchema = new Schema({
     title:{
-        type: String,
+        type: String,   
         required: true
     },
     content:{

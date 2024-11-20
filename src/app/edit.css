@@ -11,12 +11,10 @@
 
 .h2 {
     font-size: 30px;
-    font-weight: 600;
 }
 
 .h3 {
     font-size: 20px;
-    font-weight: 600;
 }
 
 .a {
@@ -48,25 +46,39 @@ hr {
     height: fit-content;
 }
 
-.pre {
-    margin: 0.5rem auto;
-    width: 95%;
+.pre{
     color: white;
     padding: 0.5rem;
-    background-color: rgba(41, 41, 41, 0.477);
-    font-size: 0.8rem;
-    border-radius: 0.5rem;
-    display: block;
-    
-}
-.inline {
-    width: 95%;
-    color: white;
-    padding: 0.3rem 0.5rem ;
-    background-color: rgba(41, 41, 41, 0.477);
     font-size: 0.8rem;
     border-radius: 0.3rem;
-    display:inline;
+    display: block;
+    overflow-wrap: break-word;
+    text-wrap:wrap;
+} 
+
+.wrapshiki{
+    color: white;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    border-radius: 0.3rem;
+    display: block;
+    overflow-wrap: break-word;
+    text-wrap:wrap;
+} 
+.shiki{
+    width: 100%;
+    min-width: fit-content;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+}
+.inline {
+    width:fit-content;
+    color: white;
+    padding: 0.1rem 0.5rem ;
+    background-color: rgba(97, 97, 97, 0.477);
+    font-size: 0.8rem;
+    border-radius: 0.3rem;
+    display:inline-block;
 }
 .img{
     width: 50%;

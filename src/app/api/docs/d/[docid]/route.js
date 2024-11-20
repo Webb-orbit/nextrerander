@@ -8,11 +8,9 @@ import { NextResponse } from "next/server";
 await connectdb()
 
 export async function DELETE(req, { params }) {
-    console.log(params);
-    
-    const documentid =  params.docid
+    const {docid} = await params
     const id =  await getokenid()
-    if (!isValidObjectId(documentid)) {
+    if (!isValidObjectId(docid)) {
         return NextResponse.json({ success: false, message: "document id is required" }, { status: 400 })
     }
     if (!id) {
@@ -21,7 +19,7 @@ export async function DELETE(req, { params }) {
 
     const deletedoc = await Docs.findOneAndDelete({
         $and: [
-            { _id: documentid },
+            { _id: docid },
             { creator: id }
         ]
     })

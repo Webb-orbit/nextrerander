@@ -20,6 +20,7 @@ const Sharebox = () => {
     const [shared, setshared] = useState(null)
     const [shareinfo, setshareinfo] = useState(null)
     const [sharepri, setsharepri] = useState(false)
+    const [fetched, setfetched] = useState(false)
     const [showqr, setshowqr] = useState(false)
 
     useEffect(() => {
@@ -42,13 +43,17 @@ const Sharebox = () => {
                 }
             } catch (error) {
                 console.log(error);
+            } finally{
+                setfetched(true)
             }
         })()
 
-        return () => {
-            setshareinfo(null)
+        return ()=>{
+            setfetched(false)
             setshowqr(false)
             setshared(null)
+            setshareinfo(null)
+            setsharepri(false)
         }
     }, [docid])
 
@@ -79,9 +84,9 @@ const Sharebox = () => {
             container={"flex items-center justify-center backdrop-blur-sm"}
             classes={"static w-[35%] h-[65vh] "}
             closehandel={() => dispatch(setrandercompo(null))}>
-            <div className=' py-3 h-full'>
+            {fetched?<div className=' py-3 h-full'>
                 {
-                    shared ? (
+                    shared && shareinfo? (
                         <div className=' flex flex-col   gap-5'>
                             <h3>your Public link</h3>
                             <div className='flex flex-col justify-between h-full gap-3'>
@@ -111,13 +116,13 @@ const Sharebox = () => {
                             </div>
                         </div>
                     )}
-            </div>
+            </div>:<p>loading..</p>}
 
-            {showqr && shareinfo?._id && <div className=' select-none fixed bottom-3 left-3 w-[50vh] h-[50vh] bg-zinc-950 outline-1 outline-neutral-300 outline p-5 rounded-md  flex items-center justify-between flex-col'>
+            {showqr && shareinfo?._id && <div className=' select-none fixed bottom-3 left-3 w-[50vh] h-[50vh] bg-zinc-950 outline-1 outline-neutral-300 outline p-5 rounded-md  flex items-center justify-between flex-col max-sm:w-[90%]'>
                 <h4 className=' noto-sans text-[1rem] text-center capitalize font-medium'>share as a QR code</h4>
-                <div className=' h-full flex items-center justify-center'>
+                <div className=' flex items-center justify-center max-sm:w-[90%]'>
                     <QRCodeSVG
-                        className='p-2 bg-black rounded-md scale-[1.2]'
+                        className='p-2 bg-black rounded-md scale-[1.2] w-[90%] h-[90%]'
                         value={`${process.env.NEXT_PUBLIC_FRONT_BASE_URL}/share/${shareinfo?._id}`} />
                 </div>
                 <p className='text-[0.6rem] text-zinc-500 noto-sans'>Use phone camera to scan the QR code and instantly access this on other devices.</p>

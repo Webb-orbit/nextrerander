@@ -42,7 +42,7 @@ const Page = () => {
       const logdata = logresponse.data
       dispatch(storelogin(logdata._id));
       console.log(data);
-      // router.push("/dashbord");
+      router.push("/dashbord");
     } catch (error) {
       setError("root", {message: error?.message || "something broken"})
       console.log(error);

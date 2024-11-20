@@ -6,7 +6,7 @@ import { Offlinedoc } from "@/models/offlinemodel"
 
 export async function PATCH(req, {params}) {
     const { title, content } = await req.json()
-    const offdocid = params.offdocid;
+    const {offdocid} =  await params
     const id = await getokenid();
     const ipress = ip.address('private', 'ipv4')
     if (!isValidObjectId(id)) {
@@ -27,7 +27,7 @@ export async function PATCH(req, {params}) {
         return NextResponse.json({ success: false, message: "document not found" }, { status: 500 })
     }
     if (!ip.isEqual(document.ipadd, ipress)) {
-        return NextResponse.json({ success: false, message: "you cannot delete in this device" }, { status: 500 })
+        return NextResponse.json({ success: false, message: "you cannot delete on this device" }, { status: 500 })
     }
 
     document.title = title;

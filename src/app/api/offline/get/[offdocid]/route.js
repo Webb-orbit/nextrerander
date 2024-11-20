@@ -5,7 +5,7 @@ import { Offlinedoc } from "@/models/offlinemodel"
 import ip from "ip"
 
 export async function GET(req, { params }) {
-    const offdocid = params.offdocid;
+    const {offdocid} =  await params
     const id = await getokenid();
     const ipress = ip.address('private', 'ipv4')
     if (!isValidObjectId(id)) {

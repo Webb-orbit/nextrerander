@@ -8,10 +8,10 @@ import { NextResponse } from "next/server";
 await connectdb()
 
 export async function PATCH(req, {params}) {
-    const documentid = params.docid
+    const {docid} = await params
     const { title, content, shared } = await req.json()
     const id = await getokenid()
-    if (!isValidObjectId(documentid)) {
+    if (!isValidObjectId(docid)) {
         return NextResponse.json({success: false, message: "document id is required"}, {status: 400})
     }
     if (!id) {
@@ -21,7 +21,7 @@ export async function PATCH(req, {params}) {
     const updatedoc = await Docs.findOneAndUpdate({
         $and: [
             { creator: id },
-            { _id: documentid }
+            { _id: docid }
         ]
     },{
         $set:{

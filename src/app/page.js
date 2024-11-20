@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { storelogin } from "@/app/store/userslice";
 import { Pageloading } from "@/app/utiles/Pageloading";
 import { PickGetUser } from './lib/auth';
+import { getData } from './indexedstore';
 
 const Page = () => {
   const dispatch = useDispatch()
@@ -27,6 +28,8 @@ const Page = () => {
         console.log(response);
       } catch (error) {
         setloading(false)
+        const data = await  getData("671f7235a0e16867e")
+        console.log("i am response of indexeddb with service worker",data);
         console.log(error);
       }
     })()

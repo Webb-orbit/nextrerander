@@ -21,13 +21,13 @@ const Deletedoc = () => {
             }
             const deletedata = dele.data
             if (deletedata) {
-                dispatch(showtoast({ title: "Document deleted", icon: "done", timeout: 3000, color: "-green-600", bgcolor: "neutral-700", position: "bottom_right" }))
+                // dispatch(showtoast({ title: "Document deleted", icon: "done", timeout: 3000, color: "-green-600", bgcolor: "neutral-700", position: "bottom_right" }))
                 dispatch(deleteoption(false))
                 router.push("/dashboard")
             }
         } catch (error) {
             console.log(error);
-            dispatch(showtoast({ title: "OPPS! something went wrong", icon: "opps", timeout: 3000, color: "-red-600", bgcolor: "neutral-700", position: "bottom_right" }))
+            // dispatch(showtoast({ title: "OPPS! something went wrong", icon: "opps", timeout: 3000, color: "-red-600", bgcolor: "neutral-700", position: "bottom_right" }))
         }
     }
 

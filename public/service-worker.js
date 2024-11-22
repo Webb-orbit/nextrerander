@@ -6,24 +6,41 @@ const addResourcesToCache = async (resources) => {
 self.addEventListener("install", (event) => {
   event.waitUntil(
     addResourcesToCache([
-      '/','/_next/static/'
+      '/', '/hello.js', '/offline.html'
     ]),
   );
 });
 
-self.addEventListener('fetch', (event) => {
-  console.log("fetch event-: ", event);
-  
+const putInCache = async (request, response) => {
+  const cache = await caches.open("v1");
+  await cache.put(request, response);
+};
+
+const cacheFirst = async ({ request, fallbackUrl }) => {
+  const responseFromCache = await caches.match(request);
+  if (responseFromCache) {
+    return responseFromCache;
+  }
+  try {
+    const responseFromNetwork = await fetch(request);
+    putInCache(request, responseFromNetwork.clone());
+    return responseFromNetwork;
+  } catch (error) {
+    const fallbackResponse = await caches.match(fallbackUrl);
+    if (fallbackResponse) {
+      return fallbackResponse;
+    }
+  }
+};
+
+self.addEventListener("fetch", (event) => {
   if (event.request.method === 'GET') {
     event.respondWith(
-      caches.match(event.request).then((response) => {
-        return (
-          response ||
-          fetch(event.request).catch(() => {
-            return caches.match('/index.jsx');
-          })
-        );
-      })
+      cacheFirst({
+        request: event.request,
+        fallbackUrl: "/offline.html",
+      }),
     );
   }
 });
+// http://localhost:3000/doc/671f7235a0e16867e402db28?

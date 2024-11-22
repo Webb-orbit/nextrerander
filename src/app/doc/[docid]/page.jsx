@@ -40,6 +40,8 @@ const Page = () => {
         (async () => {
             try {
                 const documents = await PickOneDoc(docid);
+                console.log("hello",documents);
+                
                 if (!documents.success) {
                     throw new Error(documents.message);
                 }
